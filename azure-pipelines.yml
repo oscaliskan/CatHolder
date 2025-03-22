@@ -9,16 +9,12 @@ trigger:
       - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: "default"
 
 variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: UseJava@1
-  inputs:
-    version: '11'  # JDK 11 (Android için uyumlu)
-
 - script: |
     yes | sudo ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --licenses
   displayName: 'Android Lisanslarını Kabul Et'
