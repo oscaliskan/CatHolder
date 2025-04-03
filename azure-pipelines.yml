@@ -16,7 +16,7 @@ variables:
 
 steps:
 - script: |
-    echo y | "%ANDROID_HOME%/cmdline-tools/latest/bin/sdkmanager" --licenses
+    echo y | "C:\Users\oscal\AppData\Local\Android\Sdk/cmdline-tools/latest/bin/sdkmanager" --licenses
   displayName: 'Android Lisanslarını Kabul Et (Windows)'
 
 - task: Gradle@2
