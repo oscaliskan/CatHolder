@@ -28,7 +28,7 @@ steps:
 - task: AndroidSigning@3
   inputs:
     apkFiles: '**/*.apk'
-    apksignerKeystoreFile: 'C:\Users\oscal\AppData\Local\Android\Sdk\BirdHolderKeystore.jks'
+    apksignerKeystoreFile: '$(BirdHolderKeystore.secureFilePath)'
     apksignerKeystorePassword: '$(KEYSTORE_PASSWORD)'
     apksignerKeystoreAlias: '$(KEY_ALIAS)'
     apksignerKeyPassword: '$(KEY_PASSWORD)'
