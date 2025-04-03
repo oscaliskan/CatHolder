@@ -6,7 +6,7 @@
 trigger:
   branches:
     include:
-      - main
+      - master
 
 pool:
   name: "default"
@@ -15,22 +15,22 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: |
-    yes | sudo ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --licenses
-  displayName: 'Android Lisanslarını Kabul Et'
+  - script: |
+      echo y | "C:\Users\oscal\AppData\Local\Android\Sdk/cmdline-tools/latest/bin/sdkmanager" --licenses
+    displayName: 'Android Lisanslarını Kabul Et (Windows)'
 
-- task: Gradle@2
-  inputs:
-    gradleWrapperFile: 'gradlew'
-    tasks: 'assemble$(buildConfiguration)'
-    publishJUnitResults: false
+  - task: Gradle@2
+    inputs:
+      gradleWrapperFile: 'gradlew'
+      tasks: assembleDebug'
+      publishJUnitResults: false
 
-- task: CopyFiles@2
-  inputs:
-    contents: '**/*.apk'
-    targetFolder: '$(Build.ArtifactStagingDirectory)'
+  - task: CopyFiles@2
+    inputs:
+      contents: '**/*.apk'
+      targetFolder: '$(Build.ArtifactStagingDirectory)'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    artifactName: 'APK'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: 'APK'
