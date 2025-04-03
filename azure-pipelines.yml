@@ -25,13 +25,21 @@ steps:
     tasks: assembleDebug'
     publishJUnitResults: false
 
+- task: DownloadSecureFile@1
+  name: keystoreFile
+  inputs:
+    secureFile: 'BirdHolderKeystore.jks'
+    retryCount: 2
+
 - task: AndroidSigning@3
   inputs:
     apkFiles: '**/*.apk'
-    apksignerKeystoreFile: '$(BirdHolderKeystore.secureFilePath)'
-    apksignerKeystorePassword: '$(KEYSTORE_PASSWORD)'
-    apksignerKeystoreAlias: '$(KEY_ALIAS)'
-    apksignerKeyPassword: '$(KEY_PASSWORD)'
+    sign: true
+    keystoreFile: '$(keystoreFile.secureFilePath)'
+    keystorePass: '$(KEYSTORE_PASSWORD)'
+    keyAlias: '$(KEY_ALIAS)'
+    keyPass: '$(KEY_PASSWORD)'
+    zipalign: true
 
 - task: CopyFiles@2
   inputs:
