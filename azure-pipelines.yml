@@ -16,8 +16,8 @@ variables:
 
 steps:
 - script: |
-    yes | sudo ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --licenses
-  displayName: 'Android Lisanslarını Kabul Et'
+    echo y | "%ANDROID_HOME%/cmdline-tools/latest/bin/sdkmanager" --licenses
+  displayName: 'Android Lisanslarını Kabul Et (Windows)'
 
 - task: Gradle@2
   inputs:
