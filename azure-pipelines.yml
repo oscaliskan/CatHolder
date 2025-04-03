@@ -22,7 +22,7 @@ steps:
   - task: Gradle@2
     inputs:
       gradleWrapperFile: 'gradlew'
-      tasks: assembleDebug'
+      tasks: 'release'
       publishJUnitResults: false
 
   - task: CopyFiles@2
