@@ -8,7 +8,6 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  system_accesstoken: $(System.AccessToken)  # OAuth token'ı değişken olarak tanımla
 
 steps:
 - script: |
@@ -31,14 +30,20 @@ steps:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'APK'
 
-# Python script'ini çalıştır
+# ———————— Aşağıyı ekleyin ————————
+
+# 1) Checkout ve credential koruma
+- checkout: self
+  persistCredentials: true
+
+# 2) Python versiyonu
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.x'
   displayName: 'Python Versiyonunu Ayarla'
 
-- script: |
-    python pr_commenter.py
+# 3) PR kontrol & yorum script'i
+- script: python pr_commenter.py
   displayName: 'PR Değişikliklerini Kontrol Et ve Yorum Yap'
   env:
-    SYSTEM_ACCESSTOKEN: $(system_accesstoken)  # Token'ı ortam değişkeni olarak ayarla
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
