@@ -1,8 +1,3 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
   branches:
     include:
@@ -13,6 +8,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  system_accesstoken: $(System.AccessToken)  # OAuth token'ı değişken olarak tanımla
 
 steps:
 - script: |
@@ -34,3 +30,15 @@ steps:
   inputs:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'APK'
+
+# Python script'ini çalıştır
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+  displayName: 'Python Versiyonunu Ayarla'
+
+- script: |
+    python pr_commenter.py
+  displayName: 'PR Değişikliklerini Kontrol Et ve Yorum Yap'
+  env:
+    SYSTEM_ACCESSTOKEN: $(system_accesstoken)  # Token'ı ortam değişkeni olarak ayarla
