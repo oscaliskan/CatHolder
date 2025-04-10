@@ -36,12 +36,6 @@ steps:
 - checkout: self
   persistCredentials: true
 
-# 2) Python versiyonu
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '3.x'
-  displayName: 'Python Versiyonunu Ayarla'
-
 # 3) PR kontrol & yorum script'i
 - script: python pr_commenter.py
   displayName: 'PR Değişikliklerini Kontrol Et ve Yorum Yap'
