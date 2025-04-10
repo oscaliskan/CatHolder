@@ -32,10 +32,6 @@ steps:
 
 # ———————— Aşağıyı ekleyin ————————
 
-# 1) Checkout ve credential koruma
-- checkout: self
-  persistCredentials: true
-
 # 3) PR kontrol & yorum script'i
 - script: python pr_commenter.py
   displayName: 'PR Değişikliklerini Kontrol Et ve Yorum Yap'
