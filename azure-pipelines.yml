@@ -35,3 +35,12 @@ steps:
   inputs:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'APK'
+
+- task: publishPlaystore@1
+  inputs:
+    jsonFile: 'catholder_serviceaccount.json'
+    apkPath: '**/*.apk'
+    packageName: 'com.oscaliskan.catholder'
+    locale: 'en-US'
+    message: 'test release'
+    track: 'alpha'
