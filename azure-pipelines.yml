@@ -36,11 +36,13 @@ steps:
     pathtoPublish: '$(Build.ArtifactStagingDirectory)'
     artifactName: 'APK'
 
-- task: publishPlaystore@1
+- task: GooglePlayRelease@4
   inputs:
-    jsonFile: 'catholder_serviceaccount.json'
-    apkPath: '**/*.apk'
-    packageName: 'com.oscaliskan.catholder'
-    locale: 'en-US'
-    message: 'test release'
-    track: 'alpha'
+    authType: 'JsonFile'
+    serviceAccountKey: 'catholder_serviceaccount.json'
+    applicationId: 'com.oscaliskan.catholder'
+    action: 'SingleApk'
+    apkFile: '**/*.apk'
+    track: 'internal'
+    changeLogFile: 'test release'
+    releaseName: 'Release Test'
